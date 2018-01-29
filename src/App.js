@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import runJs from './runJs';
 
 class App extends Component {
 	state = {
@@ -12,7 +13,7 @@ class App extends Component {
 	runJs = (event) => {
 		event.preventDefault();
 
-		eval(this.state.js);
+		runJs(this.state.js, {});
 	}
 
   render() {
