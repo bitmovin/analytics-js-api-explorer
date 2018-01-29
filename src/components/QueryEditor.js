@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import CodeMirror from 'react-codemirror';
-import 'codemirror/lib/codemirror.css';
+import { Controlled as CodeMirror } from 'react-codemirror2';
 import 'codemirror/mode/javascript/javascript';
+import 'codemirror/lib/codemirror.css';
 import runJs from '../lib/runJs';
 
 const initialJs = `
@@ -22,7 +22,7 @@ export default class QueryEditor extends Component {
   }
 
   console = {
-    log: (data) => this.props.onResult(JSON.stringify(data)),
+    log: (data) => this.props.onResult(JSON.stringify(data, null, 2)),
   };
 
   updateJs = (js) => {
@@ -41,10 +41,11 @@ export default class QueryEditor extends Component {
     return (
       <form onSubmit={this.runJs} className="QueryEditor">
         <CodeMirror
-          onChange={this.updateJs}
           value={this.state.js}
-          autofocus
-          mode='javascript'
+          options={{
+            mode: 'javascript',
+          }}
+          onChange={this.updateJs}
         />
         <button>Run</button>
       </form>
