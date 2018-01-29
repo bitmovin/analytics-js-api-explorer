@@ -7,7 +7,6 @@ import './Main.css';
 
 export default class Main extends Component {
   state = {
-    queryBuilder: new Bitmovin({ apiKey: this.props.apiKey }).analytics.queries.builder,
     queryResult: '',
   };
 
@@ -23,14 +22,21 @@ export default class Main extends Component {
     }
 
     return licenseKey;
-  }
+  };
 
   setLicenseKey = (licenseKey) => {
     localStorage.setItem('licenseKey', licenseKey);
     this.forceUpdate();
-  }
+  };
 
-  handleLicenseChange = (event) => this.setLicenseKey(event.currentTarget.value)
+  handleLicenseChange = (event) => this.setLicenseKey(event.currentTarget.value);
+
+  queryBuilder = () => {
+    const client = new Bitmovin({ apiKey: this.props.apiKey });
+    // TODO: Remove avg
+    return client.analytics.queries.builder.avg('STARTUPTIME')
+      .licenseKey(this.currentLicenseKey());
+  };
 
   render() {
     const { apiKey, licenses } = this.props;
@@ -50,7 +56,7 @@ export default class Main extends Component {
         <main>
           <QueryEditor
             onResult={this.handleQueryResult}
-            queryBuilder={queryBuilder}
+            queryBuilder={this.queryBuilder()}
           />
           <QueryResult
             value={queryResult}

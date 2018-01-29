@@ -10,7 +10,7 @@ const fromDate = moment().subtract(7, 'days').toDate();
 const toDate = new Date();
 
 queryBuilder
-  .median('STARTUPTIME')
+  // .median('STARTUPTIME') TODO: Uncomment
   .between(fromDate, toDate)
   .query()
   .then(console.log);
