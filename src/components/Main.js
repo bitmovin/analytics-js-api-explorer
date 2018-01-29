@@ -12,6 +12,11 @@ export default class Main extends Component {
   state = {
     queryBuilder: new Bitmovin({ apiKey: this.props.apiKey }).analytics.queries.builder,
     js: '',
+    logData: '',
+  };
+
+  console = {
+    log: (logData) => this.setState({ logData }),
   };
 
   updateJs = (js) => {
@@ -23,8 +28,8 @@ export default class Main extends Component {
 
     const { queryBuilder } = this.state;
 
-    runJs(this.state.js, { moment, queryBuilder });
-  }
+    runJs(this.state.js, { moment, queryBuilder, console: this.console });
+  };
 
   currentLicenseKey = () => {
     const currentLicenseKey = localStorage.getItem('licenseKey');
@@ -71,7 +76,7 @@ export default class Main extends Component {
             <button>Run</button>
           </form>
           <pre>
-            Result
+            {this.state.logData}
           </pre>
         </main>
       </div>
