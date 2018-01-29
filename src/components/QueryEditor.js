@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+import { Button } from 'react-bootstrap';
 import { Controlled as CodeMirror } from 'react-codemirror2';
 import 'codemirror/mode/javascript/javascript';
 import 'codemirror/lib/codemirror.css';
@@ -30,12 +31,26 @@ export default class QueryEditor extends Component {
   };
 
   runJs = (event) => {
-    event.preventDefault();
-
     const { queryBuilder } = this.props;
-
     runJs(this.state.js, { moment, queryBuilder, console: this.console });
   };
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.runJs();
+  }
+
+  componentDidMount() {
+    window.onkeyup = ({ altKey, key }) => {
+      if (altKey && key === 'Enter') {
+        this.runJs();
+      }
+    };
+  }
+
+  componentWillUnmount() {
+    window.onkeyup = null;
+  }
 
   render() {
     return (
@@ -48,7 +63,7 @@ export default class QueryEditor extends Component {
           onChange={this.updateJs}
           autoFocus
         />
-        <button>Run</button>
+        <Button>Run <i>(Alt + Enter)</i></Button>
       </form>
     )
   }
