@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import runJs from './runJs';
+import moment from 'moment';
 
 class App extends Component {
 	state = {
@@ -13,7 +14,7 @@ class App extends Component {
 	runJs = (event) => {
 		event.preventDefault();
 
-		runJs(this.state.js, {});
+		runJs(this.state.js, { moment });
 	}
 
   render() {
