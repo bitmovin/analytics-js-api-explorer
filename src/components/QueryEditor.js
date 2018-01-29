@@ -46,6 +46,7 @@ export default class QueryEditor extends Component {
             mode: 'javascript',
           }}
           onChange={this.updateJs}
+          autoFocus
         />
         <button>Run</button>
       </form>

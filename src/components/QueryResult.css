@@ -1,0 +1,9 @@
+.QueryResult {
+  background: #EEE;
+  border-left: 1px solid #DDD;
+}
+
+.QueryResult > .CodeMirror {
+  height: 100%;
+  background: #EEE;
+}
