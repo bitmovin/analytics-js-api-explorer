@@ -1,0 +1,9 @@
+.LicenseKeySelect.form-group {
+  display: flex;
+  align-items: baseline;
+  margin: 0;
+}
+
+.LicenseKeySelect label {
+  margin-right: 1rem;
+}

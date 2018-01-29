@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormGroup, ControlLabel, FormControl } from 'react-bootstrap';
+import './LicenseKeySelect.css';
 
 export default function LicenseKeySelect({ currentLicenseKey, handleLicenseChange, licenses }) {
   return (

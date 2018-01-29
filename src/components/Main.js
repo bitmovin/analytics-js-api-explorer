@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import Bitmovin from 'bitmovin-javascript';
-import { Panel } from 'react-bootstrap';
 import moment from 'moment';
 import LicenseKeySelect from './LicenseKeySelect.js';
 import runJs from '../lib/runJs';
+import './Main.css';
 
 export default class Main extends Component {
   state = {
@@ -49,12 +49,15 @@ export default class Main extends Component {
 
     return (
       <div className="Main">
-        {licenses.length > 1 && <LicenseKeySelect
-          currentLicenseKey={currentLicenseKey}
-          handleLicenseChange={this.handleLicenseChange}
-          licenses={licenses}
-        />}
-        <Panel>
+        <header>
+          <h1>Bitmovin API Explorer</h1>
+          {licenses.length > 1 && <LicenseKeySelect
+            currentLicenseKey={currentLicenseKey}
+            handleLicenseChange={this.handleLicenseChange}
+            licenses={licenses}
+          />}
+        </header>
+        <main>
           <form onSubmit={this.runJs}>
             <input
               onChange={this.updateJs}
@@ -62,7 +65,10 @@ export default class Main extends Component {
             />
             <button>Run</button>
           </form>
-        </Panel>
+          <pre>
+            Result
+          </pre>
+        </main>
       </div>
     );
   }

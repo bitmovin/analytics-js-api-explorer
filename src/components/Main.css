@@ -1,0 +1,24 @@
+.Main > header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: #2FABE0;
+  color: white;
+  font-weight: bold;
+}
+
+.Main header h1 {
+  font-size: 2rem;
+  margin: 0;
+}
+
+.Main main {
+  display: flex;
+}
+
+.Main main form,
+.Main main pre {
+  width: 50vw;
+  padding: 1rem;
+}
