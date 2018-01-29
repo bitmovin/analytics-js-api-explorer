@@ -8,15 +8,26 @@ import LicenseKeySelect from './LicenseKeySelect.js';
 import runJs from '../lib/runJs';
 import './Main.css';
 
+const initialJs = `
+const fromDate = moment().subtract(7, 'days').toDate();
+const toDate = new Date();
+
+queryBuilder
+  .median('STARTUPTIME')
+  .between(fromDate, toDate)
+  .query()
+  .then(console.log);
+`.trim();
+
 export default class Main extends Component {
   state = {
     queryBuilder: new Bitmovin({ apiKey: this.props.apiKey }).analytics.queries.builder,
-    js: '',
+    js: initialJs,
     logData: '',
   };
 
   console = {
-    log: (logData) => this.setState({ logData }),
+    log: (data) => this.setState({ logData: JSON.stringify(data) }),
   };
 
   updateJs = (js) => {
