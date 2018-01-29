@@ -1,32 +1,15 @@
 import React, { Component } from 'react';
-import runJs from './runJs';
-import moment from 'moment';
+import Authenticated from './components/Authenticated';
+import Main from './components/Main';
 
 class App extends Component {
-  state = {
-    js: '',
-  };
-
-  updateJs = ({ target }) => {
-    this.setState({ js: target.value });
-  };
-
-  runJs = (event) => {
-    event.preventDefault();
-
-    runJs(this.state.js, { moment });
-  }
-
   render() {
     return (
       <div className="App">
-        <form onSubmit={this.runJs}>
-          <input
-            onChange={this.updateJs}
-            value={this.state.js}
-          />
-          <button>Run</button>
-        </form>
+        <Authenticated>
+          <Main>
+          </Main>
+        </Authenticated>
       </div>
     );
   }
