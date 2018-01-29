@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Bitmovin from 'bitmovin-javascript';
 import LicenseKeySelect from './LicenseKeySelect.js';
 import QueryEditor from './QueryEditor.js';
+import QueryResult from './QueryResult.js';
 import './Main.css';
 
 export default class Main extends Component {
@@ -51,9 +52,9 @@ export default class Main extends Component {
             onResult={this.handleQueryResult}
             queryBuilder={queryBuilder}
           />
-          <pre>
-            {queryResult}
-          </pre>
+          <QueryResult
+            value={queryResult}
+          />
         </main>
       </div>
     );

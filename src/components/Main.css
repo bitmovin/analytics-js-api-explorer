@@ -18,7 +18,7 @@
 }
 
 .Main .QueryEditor,
-.Main main > pre {
+.Main .QueryResult {
   width: 50vw;
   padding: 1rem;
 }
