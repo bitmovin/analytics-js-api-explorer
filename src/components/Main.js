@@ -1,46 +1,16 @@
 import React, { Component } from 'react';
 import Bitmovin from 'bitmovin-javascript';
-import moment from 'moment';
-import CodeMirror from 'react-codemirror';
-import 'codemirror/lib/codemirror.css';
-import 'codemirror/mode/javascript/javascript';
 import LicenseKeySelect from './LicenseKeySelect.js';
-import runJs from '../lib/runJs';
+import QueryEditor from './QueryEditor.js';
 import './Main.css';
-
-const initialJs = `
-const fromDate = moment().subtract(7, 'days').toDate();
-const toDate = new Date();
-
-queryBuilder
-  .median('STARTUPTIME')
-  .between(fromDate, toDate)
-  .query()
-  .then(console.log);
-`.trim();
 
 export default class Main extends Component {
   state = {
     queryBuilder: new Bitmovin({ apiKey: this.props.apiKey }).analytics.queries.builder,
-    js: initialJs,
-    logData: '',
+    queryResult: '',
   };
 
-  console = {
-    log: (data) => this.setState({ logData: JSON.stringify(data) }),
-  };
-
-  updateJs = (js) => {
-    this.setState({ js });
-  };
-
-  runJs = (event) => {
-    event.preventDefault();
-
-    const { queryBuilder } = this.state;
-
-    runJs(this.state.js, { moment, queryBuilder, console: this.console });
-  };
+  handleQueryResult = (queryResult) => this.setState({ queryResult });
 
   currentLicenseKey = () => {
     const currentLicenseKey = localStorage.getItem('licenseKey');
@@ -62,8 +32,8 @@ export default class Main extends Component {
   handleLicenseChange = (event) => this.setLicenseKey(event.currentTarget.value)
 
   render() {
-    const { licenses } = this.props;
-    const { queryBuilder } = this.state;
+    const { apiKey, licenses } = this.props;
+    const { queryBuilder, queryResult } = this.state;
     const currentLicenseKey = this.currentLicenseKey();
 
     return (
@@ -77,17 +47,12 @@ export default class Main extends Component {
           />}
         </header>
         <main>
-          <form onSubmit={this.runJs}>
-            <CodeMirror
-              onChange={this.updateJs}
-              value={this.state.js}
-              autofocus
-              mode='javascript'
-            />
-            <button>Run</button>
-          </form>
+          <QueryEditor
+            onResult={this.handleQueryResult}
+            queryBuilder={queryBuilder}
+          />
           <pre>
-            {this.state.logData}
+            {queryResult}
           </pre>
         </main>
       </div>
