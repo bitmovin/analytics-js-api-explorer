@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import Bitmovin from 'bitmovin-javascript';
 import moment from 'moment';
+import CodeMirror from 'react-codemirror';
+import 'codemirror/lib/codemirror.css';
+import 'codemirror/mode/javascript/javascript';
 import LicenseKeySelect from './LicenseKeySelect.js';
 import runJs from '../lib/runJs';
 import './Main.css';
@@ -11,8 +14,8 @@ export default class Main extends Component {
     js: '',
   };
 
-  updateJs = ({ target }) => {
-    this.setState({ js: target.value });
+  updateJs = (js) => {
+    this.setState({ js });
   };
 
   runJs = (event) => {
@@ -59,9 +62,11 @@ export default class Main extends Component {
         </header>
         <main>
           <form onSubmit={this.runJs}>
-            <input
+            <CodeMirror
               onChange={this.updateJs}
               value={this.state.js}
+              autofocus
+              mode='javascript'
             />
             <button>Run</button>
           </form>

@@ -17,8 +17,8 @@
   display: flex;
 }
 
-.Main main form,
-.Main main pre {
+.Main main > form,
+.Main main > pre {
   width: 50vw;
   padding: 1rem;
 }
