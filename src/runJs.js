@@ -1,3 +1,3 @@
 export default (js, { queryBuilder, moment }) => {
-	eval(js);
+  eval(js);
 }
