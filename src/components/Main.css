@@ -1,4 +1,8 @@
 .Main > header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -15,6 +19,9 @@
 
 .Main main {
   display: flex;
+  height: 100vh;
+  box-sizing: border-box;
+  padding-top: 7rem;
 }
 
 .Main .QueryEditor,
