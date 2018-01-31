@@ -38,9 +38,7 @@ export default class Main extends Component {
 
   queryBuilder = () => {
     const client = new Bitmovin({ apiKey: this.props.apiKey });
-    // TODO: Remove avg
-    return client.analytics.queries.builder.avg('STARTUPTIME')
-      .licenseKey(this.currentLicenseKey());
+    return client.analytics.queries.builder.licenseKey(this.currentLicenseKey());
   };
 
   render() {
