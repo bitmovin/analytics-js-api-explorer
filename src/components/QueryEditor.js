@@ -26,7 +26,7 @@ export default class QueryEditor extends Component {
     log: (data) => this.props.onResult(JSON.stringify(data, null, 2)),
   };
 
-  updateJs = (js) => {
+  updateJs = (editor, data, js) => {
     this.setState({ js });
   };
 
@@ -59,8 +59,9 @@ export default class QueryEditor extends Component {
           value={this.state.js}
           options={{
             mode: 'javascript',
+            tabSize: 2,
           }}
-          onChange={this.updateJs}
+          onBeforeChange={this.updateJs}
           autoFocus
         />
         <Button>Run <i>(Alt + Enter)</i></Button>
