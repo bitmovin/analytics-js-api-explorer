@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Nav, NavItem, Tab } from 'react-bootstrap';
 import './QueryResult.css';
-import loadingGif from '../loading.gif';
 import JsonResult from './JsonResult';
 import TableResult from './TableResult';
 
@@ -17,23 +16,15 @@ export default class QueryResult extends Component {
   render() {
     const { value, loading } = this.props;
 
-    if (loading) {
-      return (
-        <div className="QueryResult">
-          <img className="loadingIndicator" src={loadingGif} alt="loading" />
-        </div>
-      );
-    }
-
     return (
       <Tab.Container id="result-view-type" defaultActiveKey="json" className="QueryResult">
         <div >
           <Tab.Content animation>
             <Tab.Pane eventKey="json">
-              <JsonResult value={value} />
+              <JsonResult value={value} loading={loading} />
             </Tab.Pane>
             <Tab.Pane eventKey="table">
-              <TableResult value={value} />
+              <TableResult value={value} loading={loading} />
             </Tab.Pane>
           </Tab.Content>
           <Nav bsStyle="pills">

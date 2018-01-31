@@ -1,9 +1,14 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
+import LoadingIndicator from './LoadingIndicator';
 
-export default function JsonResult({ value }) {
+export default function JsonResult({ value, loading }) {
+  if (loading) {
+    return <LoadingIndicator />
+  }
+
   if (!value) {
-    return '';
+    return <i>No data</i>;
   }
 
   let { rows } = JSON.parse(value);

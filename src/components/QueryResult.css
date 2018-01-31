@@ -7,15 +7,6 @@
   overflow: auto;
 }
 
-.QueryResult .loadingIndicator {
-  width: 10rem;
-  height: 10rem;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  margin: -6rem 0 0 -5rem;
-}
-
 .QueryResult .tab-content {
   flex-grow: 1;
 }
