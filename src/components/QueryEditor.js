@@ -15,17 +15,12 @@ queryBuilder
   // .median('STARTUPTIME') TODO: Uncomment
   .between(fromDate, toDate)
   .query()
-  .then(console.log);
 `.trim();
 
 export default class QueryEditor extends Component {
   state = {
     js: initialJs,
     error: null,
-  }
-
-  console = {
-    log: (data) => this.props.onResult(JSON.stringify(data, null, 2)),
   };
 
   updateJs = (editor, data, js) => {
@@ -37,7 +32,8 @@ export default class QueryEditor extends Component {
     onRun();
 
     try {
-      await runJs(this.state.js, { moment, queryBuilder, console: this.console });
+      const result = await runJs(this.state.js, { moment, queryBuilder });
+      this.props.onResult(JSON.stringify(result, null, 2));
     } catch (error) {
       this.props.onError(error.toString());
     }
@@ -94,11 +90,11 @@ export default class QueryEditor extends Component {
               <code>queryBuilder</code> –
               Bitmovin Analytics query builder preconfigured for your account.
             </li>
-            <li>
-              <code>console</code> –
-              Use console statements to print results. Only <code>console.log</code> is supported.
-            </li>
           </ul>
+          <p>
+            The explorer outputs the value of the last statement. If it's a promise,
+            like when you call <code>.query()</code>, the promise is resolved.
+          </p>
         </div>
       </div>
     )

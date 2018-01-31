@@ -28,4 +28,5 @@
 .Main .QueryResult {
   width: 50vw;
   padding: 3rem;
+  padding-bottom: 2rem;
 }

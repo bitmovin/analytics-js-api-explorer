@@ -1,7 +1,10 @@
 .QueryResult {
+  display: flex;
+  flex-direction: column;
   background: #EEE;
   border-left: 1px solid #DDD;
   position: relative;
+  overflow: auto;
 }
 
 .QueryResult .loadingIndicator {
@@ -13,7 +16,20 @@
   margin: -6rem 0 0 -5rem;
 }
 
-.QueryResult > .CodeMirror {
-  height: 100%;
+.QueryResult .react-codemirror2 {
+  flex-grow: 1;
+}
+
+.QueryResult .CodeMirror {
+  height: auto;
   background: #EEE;
+}
+
+.QueryResult .nav {
+  font-size: 1.2rem;
+  margin-top: 2rem;
+}
+
+.QueryResult .nav a[role=button] {
+  padding: 0.7rem 1rem;
 }
