@@ -1,0 +1,15 @@
+.QueryEditor .editor {
+  height: 70%;
+  position: relative;
+}
+
+.QueryEditor .runButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.QueryEditor .help {
+  height: 30%;
+  overflow: auto;
+}

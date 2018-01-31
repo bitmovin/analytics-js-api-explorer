@@ -1,3 +1,3 @@
-export default (js, { queryBuilder, moment, console }) => {
-  eval(js);
+export default async (js, { queryBuilder, moment, console }) => {
+  await eval(js);
 }

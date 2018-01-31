@@ -8,9 +8,12 @@ import './Main.css';
 export default class Main extends Component {
   state = {
     queryResult: '',
+    queryError: '',
   };
 
+  handleQueryRun = () => this.setState({ queryResult: '', queryError: '' });
   handleQueryResult = (queryResult) => this.setState({ queryResult });
+  handleQueryError = (queryError) => this.setState({ queryError });
 
   currentLicenseKey = () => {
     const currentLicenseKey = localStorage.getItem('licenseKey');
@@ -39,8 +42,8 @@ export default class Main extends Component {
   };
 
   render() {
-    const { apiKey, licenses } = this.props;
-    const { queryBuilder, queryResult } = this.state;
+    const { licenses } = this.props;
+    const { queryResult, queryError } = this.state;
     const currentLicenseKey = this.currentLicenseKey();
 
     return (
@@ -56,10 +59,12 @@ export default class Main extends Component {
         <main>
           <QueryEditor
             onResult={this.handleQueryResult}
+            onError={this.handleQueryError}
+            onRun={this.handleQueryRun}
             queryBuilder={this.queryBuilder()}
           />
           <QueryResult
-            value={queryResult}
+            value={queryError || queryResult}
           />
         </main>
       </div>

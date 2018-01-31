@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import moment from 'moment';
-import { Button } from 'react-bootstrap';
+import { Button, Glyphicon } from 'react-bootstrap';
 import { Controlled as CodeMirror } from 'react-codemirror2';
 import 'codemirror/mode/javascript/javascript';
 import 'codemirror/lib/codemirror.css';
 import runJs from '../lib/runJs';
+import './QueryEditor.css';
 
 const initialJs = `
 const fromDate = moment().subtract(7, 'days').toDate();
@@ -20,6 +21,7 @@ queryBuilder
 export default class QueryEditor extends Component {
   state = {
     js: initialJs,
+    error: null,
   }
 
   console = {
@@ -30,9 +32,15 @@ export default class QueryEditor extends Component {
     this.setState({ js });
   };
 
-  runJs = (event) => {
+  runJs = async (event) => {
+    this.props.onRun();
+
     const { queryBuilder } = this.props;
-    runJs(this.state.js, { moment, queryBuilder, console: this.console });
+    try {
+      await runJs(this.state.js, { moment, queryBuilder, console: this.console });
+    } catch (error) {
+      this.props.onError(error.toString());
+    }
   };
 
   handleClick = (event) => {
@@ -53,19 +61,42 @@ export default class QueryEditor extends Component {
   }
 
   render() {
+    const { js } = this.state;
     return (
-      <form className="QueryEditor">
-        <CodeMirror
-          value={this.state.js}
-          options={{
-            mode: 'javascript',
-            tabSize: 2,
-          }}
-          onBeforeChange={this.updateJs}
-          autoFocus
-        />
-        <Button onClick={this.handleClick}>Run <i>(Alt + Enter)</i></Button>
-      </form>
+      <div className="QueryEditor">
+        <form className="editor">
+          <CodeMirror
+            value={js}
+            options={{
+              mode: 'javascript',
+              tabSize: 2,
+            }}
+            onBeforeChange={this.updateJs}
+            autoFocus
+          />
+          <Button onClick={this.handleClick} className="runButton">
+            <Glyphicon glyph="play" /> Run <i>(Alt + Enter)</i>
+          </Button>
+        </form>
+        <div className="help">
+          <p>The following objects are predefined in the editor:</p>
+
+          <ul>
+            <li>
+              <code>moment</code> –
+              The <a href="https://momentjs.com/">Moment.js</a> library.
+            </li>
+            <li>
+              <code>queryBuilder</code> –
+              Bitmovin Analytics query builder preconfigured for your account.
+            </li>
+            <li>
+              <code>console</code> –
+              Use console statements to print results. Only <code>console.log</code> is supported.
+            </li>
+          </ul>
+        </div>
+      </div>
     )
   }
 }
