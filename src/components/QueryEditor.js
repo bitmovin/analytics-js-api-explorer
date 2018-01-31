@@ -28,14 +28,14 @@ export default class QueryEditor extends Component {
   };
 
   runJs = async (event) => {
-    const { queryBuilder, onRun, onRunEnd, onError } = this.props;
+    const { queryBuilder, onResult, onRun, onRunEnd, onError } = this.props;
     onRun();
 
     try {
       const result = await runJs(this.state.js, { moment, queryBuilder });
-      this.props.onResult(JSON.stringify(result, null, 2));
+      onResult(JSON.stringify(result, null, 2));
     } catch (error) {
-      this.props.onError(error.toString());
+      onError(error.toString());
     }
 
     onRunEnd();
