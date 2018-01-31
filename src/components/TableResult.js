@@ -7,11 +7,11 @@ export default function JsonResult({ value, loading }) {
     return <LoadingIndicator />
   }
 
-  if (!value) {
+  let { rows } = JSON.parse(value);
+
+  if (!rows || rows.length === 0 || rows[0][0] === null) {
     return <i>No data</i>;
   }
-
-  let { rows } = JSON.parse(value);
 
   // sort by timestamp and convert timestamp to dates
   if (rows[0] && rows[0].length > 1 && !isNaN(parseInt(rows[0][0], 10))) {

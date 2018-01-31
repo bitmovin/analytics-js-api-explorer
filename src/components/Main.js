@@ -7,12 +7,12 @@ import './Main.css';
 
 export default class Main extends Component {
   state = {
-    queryResult: '',
+    queryResult: '{}',
     queryError: '',
     running: false,
   };
 
-  handleQueryRun = () => this.setState({ queryResult: '', queryError: '', running: true });
+  handleQueryRun = () => this.setState({ queryError: '', running: true });
   handleQueryRunEnd = () => this.setState({ running: false });
   handleQueryResult = (queryResult) => this.setState({ queryResult });
   handleQueryError = (queryError) => this.setState({ queryError });
