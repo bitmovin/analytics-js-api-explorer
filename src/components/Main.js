@@ -9,9 +9,11 @@ export default class Main extends Component {
   state = {
     queryResult: '',
     queryError: '',
+    running: false,
   };
 
-  handleQueryRun = () => this.setState({ queryResult: '', queryError: '' });
+  handleQueryRun = () => this.setState({ queryResult: '', queryError: '', running: true });
+  handleQueryRunEnd = () => this.setState({ running: false });
   handleQueryResult = (queryResult) => this.setState({ queryResult });
   handleQueryError = (queryError) => this.setState({ queryError });
 
@@ -43,7 +45,7 @@ export default class Main extends Component {
 
   render() {
     const { licenses } = this.props;
-    const { queryResult, queryError } = this.state;
+    const { queryResult, queryError, running } = this.state;
     const currentLicenseKey = this.currentLicenseKey();
 
     return (
@@ -61,10 +63,12 @@ export default class Main extends Component {
             onResult={this.handleQueryResult}
             onError={this.handleQueryError}
             onRun={this.handleQueryRun}
+            onRunEnd={this.handleQueryRunEnd}
             queryBuilder={this.queryBuilder()}
           />
           <QueryResult
             value={queryError || queryResult}
+            loading={running}
           />
         </main>
       </div>

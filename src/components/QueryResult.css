@@ -1,6 +1,16 @@
 .QueryResult {
   background: #EEE;
   border-left: 1px solid #DDD;
+  position: relative;
+}
+
+.QueryResult .loadingIndicator {
+  width: 10rem;
+  height: 10rem;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: -6rem 0 0 -5rem;
 }
 
 .QueryResult > .CodeMirror {

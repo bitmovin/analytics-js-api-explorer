@@ -33,14 +33,16 @@ export default class QueryEditor extends Component {
   };
 
   runJs = async (event) => {
-    this.props.onRun();
+    const { queryBuilder, onRun, onRunEnd, onError } = this.props;
+    onRun();
 
-    const { queryBuilder } = this.props;
     try {
       await runJs(this.state.js, { moment, queryBuilder, console: this.console });
     } catch (error) {
       this.props.onError(error.toString());
     }
+
+    onRunEnd();
   };
 
   handleClick = (event) => {
