@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import queryString from 'query-string';
 import Bitmovin from 'bitmovin-javascript';
 import { Panel, FormGroup, ControlLabel, FormControl, HelpBlock, Button } from 'react-bootstrap';
+import './Authenticated.css';
 
 export default class Authenticated extends Component {
   state = {
