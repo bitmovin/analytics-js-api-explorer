@@ -35,7 +35,7 @@ export default class QueryEditor extends Component {
     runJs(this.state.js, { moment, queryBuilder, console: this.console });
   };
 
-  handleSubmit = (event) => {
+  handleClick = (event) => {
     event.preventDefault();
     this.runJs();
   }
@@ -54,7 +54,7 @@ export default class QueryEditor extends Component {
 
   render() {
     return (
-      <form onSubmit={this.runJs} className="QueryEditor">
+      <form className="QueryEditor">
         <CodeMirror
           value={this.state.js}
           options={{
@@ -64,7 +64,7 @@ export default class QueryEditor extends Component {
           onBeforeChange={this.updateJs}
           autoFocus
         />
-        <Button>Run <i>(Alt + Enter)</i></Button>
+        <Button onClick={this.handleClick}>Run <i>(Alt + Enter)</i></Button>
       </form>
     )
   }
