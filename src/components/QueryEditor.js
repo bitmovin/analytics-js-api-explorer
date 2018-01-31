@@ -51,6 +51,8 @@ export default class QueryEditor extends Component {
   }
 
   componentDidMount() {
+    this.runJs();
+
     window.onkeyup = ({ altKey, key }) => {
       if (altKey && key === 'Enter') {
         this.runJs();
