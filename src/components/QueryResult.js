@@ -11,7 +11,7 @@ export default function QueryResult({ value }) {
       value={value}
       options={{
         mode: { name: 'javascript', json: true },
-        readOnly: true,
+        readOnly: 'nocursor',
       }}
       onChange={() => {}}
     />
