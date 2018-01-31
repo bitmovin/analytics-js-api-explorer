@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { Nav, NavItem, Tab } from 'react-bootstrap';
-import { UnControlled as CodeMirror } from 'react-codemirror2';
-import 'codemirror/mode/javascript/javascript';
-import 'codemirror/lib/codemirror.css';
 import './QueryResult.css';
 import loadingGif from '../loading.gif';
+import JsonResult from './JsonResult';
+import TableResult from './TableResult';
 
 export default class QueryResult extends Component {
   state = {
@@ -31,17 +30,10 @@ export default class QueryResult extends Component {
         <div >
           <Tab.Content animation>
             <Tab.Pane eventKey="json">
-              <CodeMirror
-                value={value}
-                options={{
-                  mode: { name: 'javascript', json: true },
-                  readOnly: 'nocursor',
-                }}
-                onChange={() => {}}
-              />
+              <JsonResult value={value} />
             </Tab.Pane>
             <Tab.Pane eventKey="table">
-              Table!
+              <TableResult value={value} />
             </Tab.Pane>
           </Tab.Content>
           <Nav bsStyle="pills">
