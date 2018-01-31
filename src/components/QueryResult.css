@@ -16,7 +16,7 @@
   margin: -6rem 0 0 -5rem;
 }
 
-.QueryResult .react-codemirror2 {
+.QueryResult .tab-content {
   flex-grow: 1;
 }
 

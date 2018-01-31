@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Nav, NavItem } from 'react-bootstrap';
+import { Nav, NavItem, Tab } from 'react-bootstrap';
 import { UnControlled as CodeMirror } from 'react-codemirror2';
 import 'codemirror/mode/javascript/javascript';
 import 'codemirror/lib/codemirror.css';
@@ -27,24 +27,33 @@ export default class QueryResult extends Component {
     }
 
     return (
-      <div className="QueryResult">
-        <CodeMirror
-          value={value}
-          options={{
-            mode: { name: 'javascript', json: true },
-            readOnly: 'nocursor',
-          }}
-          onChange={() => {}}
-        />
-        <Nav bsStyle="pills" activeKey={this.state.viewKey} onSelect={this.handleViewSelect}>
-          <NavItem eventKey={1}>
-            JSON
-          </NavItem>
-          <NavItem eventKey={2}>
-            Table
-          </NavItem>
-        </Nav>
-      </div>
+      <Tab.Container id="result-view-type" defaultActiveKey="json" className="QueryResult">
+        <div >
+          <Tab.Content animation>
+            <Tab.Pane eventKey="json">
+              <CodeMirror
+                value={value}
+                options={{
+                  mode: { name: 'javascript', json: true },
+                  readOnly: 'nocursor',
+                }}
+                onChange={() => {}}
+              />
+            </Tab.Pane>
+            <Tab.Pane eventKey="table">
+              Table!
+            </Tab.Pane>
+          </Tab.Content>
+          <Nav bsStyle="pills">
+            <NavItem eventKey="json">
+              JSON
+            </NavItem>
+            <NavItem eventKey="table">
+              Table
+            </NavItem>
+          </Nav>
+        </div>
+      </Tab.Container>
     );
   }
 }
