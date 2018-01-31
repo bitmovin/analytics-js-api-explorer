@@ -1,5 +1,8 @@
+.QueryEditor {
+  overflow: auto;
+}
+
 .QueryEditor .editor {
-  height: 70%;
   position: relative;
 }
 
@@ -10,7 +13,9 @@
   z-index: 1000;
 }
 
-.QueryEditor .help {
-  height: 30%;
-  overflow: auto;
+.QueryEditor .CodeMirror {
+  height: auto;
+  padding-bottom: 4rem;
+  border-bottom: 1px solid #CCC;
+  margin-bottom: 4rem;
 }
