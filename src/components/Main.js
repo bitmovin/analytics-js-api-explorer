@@ -51,7 +51,7 @@ export default class Main extends Component {
     return (
       <div className="Main">
         <header>
-          <h1>Bitmovin API Explorer</h1>
+          <h1>Bitmovin Analytics API Explorer</h1>
           {licenses.length > 1 && <LicenseKeySelect
             currentLicenseKey={currentLicenseKey}
             handleLicenseChange={this.handleLicenseChange}
