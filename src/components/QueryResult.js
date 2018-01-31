@@ -40,7 +40,7 @@ export default class QueryResult extends Component {
               <JsonResult value={value} loading={loading} />
             </Tab.Pane>
             <Tab.Pane eventKey="table">
-              <TableResult value={invalidJson ? '' : value} loading={loading} />
+              {invalidJson ? '' : <TableResult value={value} loading={loading} />}
             </Tab.Pane>
           </Tab.Content>
           <Nav bsStyle="pills">
