@@ -2,6 +2,7 @@
   "name": "analytics-js-api-explorer",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://demo.bitmovin.com/public/analytics/api-explorer",
   "dependencies": {
     "bitmovin-javascript": "^1.8.0",
     "codemirror": "^5.34.0",
