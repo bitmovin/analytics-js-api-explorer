@@ -14,6 +14,7 @@ const toDate = new Date();
 queryBuilder
   .median('STARTUPTIME')
   .between(fromDate, toDate)
+  .filter('STARTUPTIME', 'GT', 0)
   .query()
 `.trim();
 
