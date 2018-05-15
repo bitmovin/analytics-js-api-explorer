@@ -37,7 +37,7 @@ export default class Main extends Component {
   handleLicenseChange = (event) => this.setLicenseKey(event.currentTarget.value);
 
   queryBuilder = () => {
-    const client = new Bitmovin({ apiKey: this.props.apiKey });
+    const client = new Bitmovin({ apiKey: this.props.apiKey, tenantOrgId: this.props.tenantOrgId });
     return client.analytics.queries.builder.licenseKey(this.currentLicenseKey());
   };
 

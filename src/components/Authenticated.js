@@ -17,9 +17,10 @@ export default class Authenticated extends Component {
   }
 
   apiKey = () => queryString.parse(window.location.search).apiKey;
+  tenantOrgId = () => queryString.parse(window.location.search).tenantOrgId;
 
   signIn = async () => {
-    const bitmovin = new Bitmovin({ apiKey: this.apiKey() });
+    const bitmovin = new Bitmovin({ apiKey: this.apiKey(), tenantOrgId: this.tenantOrgId() });
     try {
       const licensesList = await bitmovin.analytics.licenses.list();
       const licenses = licensesList.items;
@@ -34,7 +35,7 @@ export default class Authenticated extends Component {
 
     if (signedIn) {
       return React.Children.map(this.props.children, (child) =>
-        React.cloneElement(child, { licenses, apiKey: this.apiKey() })
+        React.cloneElement(child, { licenses, apiKey: this.apiKey(), tenantOrgId: this.tenantOrgId() })
       );
     }
 
@@ -48,6 +49,7 @@ export default class Authenticated extends Component {
 
     // remaining case: not logged in
     const apiKey = this.apiKey();
+    const tenantOrgId = this.tenantOrgId();
     const loginFailed = apiKey && apiKey.length > 0;
     const validationState = loginFailed ? 'error' : null;
     const error = loginFailed ? "Please check your API key." : null;
