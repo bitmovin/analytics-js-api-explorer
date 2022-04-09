@@ -6,7 +6,7 @@
   "dependencies": {
     "bitmovin-javascript": "^1.8.0",
     "codemirror": "^5.34.0",
-    "moment": "^2.20.1",
+    "moment": "^2.29.2",
     "react": "^16.2.0",
     "react-bootstrap": "^0.32.1",
     "react-codemirror2": "^4.0.0",
